@@ -1,0 +1,18 @@
+﻿#welcome {
+    text-align: center;
+    font-style: italic;
+    color: chartreuse
+}
+
+.jumbotron {
+    text-align: center;
+    font-style: italic;
+    color: chartreuse
+}
+
+#add {
+    position: absolute;
+    left: 90%;
+    top: 65%;
+    text-align: right
+}

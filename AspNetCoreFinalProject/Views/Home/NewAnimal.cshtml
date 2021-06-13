@@ -1,0 +1,73 @@
+﻿@model AspNetCoreFinalProject.ViewModels.AnimalCreateViewModel
+
+<body>
+    <form enctype="multipart/form-data" asp-controller="Home" asp-action="AddNewAnimal" method="post">
+        <div>
+            <label asp-for="Name"></label>
+            <div>
+                <input asp-for="Name" placeholder="Name" />
+                <span asp-validation-for="Name"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="Age"></label>
+            <div>
+                <input asp-for="Age" placeholder="Age" />
+                <span asp-validation-for="Age"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="Description"></label>
+            <div>
+                <input asp-for="Description" placeholder="Description" />
+                <span asp-validation-for="Description"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="Category"></label>
+            <div>
+                <select asp-for="CategoryId">
+                    @foreach (var currentCategory in ViewBag.Categories)
+                    {
+                        <option value="@currentCategory.Id" selected>
+                            @currentCategory.Name
+                        </option>
+                    }
+                    <option selected>Choose option</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <label asp-for="Photo"></label>
+            <div>
+                <div class="custom-file">
+                    <input asp-for="Photo" class="form-control custom-file-input" />
+                    <label class="custom-file-label" asp-validation-for="Photo">Choose file...</label>
+                </div>
+            </div>
+        </div>
+        <p style="color: red;">@TempData["ProcessMessage"]</p>
+        <p>
+            <div><button type="submit" class="btn btn-primary">Submit</button></div>
+        </p>
+        @section Scripts{
+            <script>
+                $(document).ready(function () {
+                    $('.custom-file-input').on("change", function () {
+                        var fileName = $(this).val().split("\\").pop();
+                        $(this).next('.custom-file-label').html(fileName);
+                    })
+                })
+            </script>
+        }
+        @if (TempData["displayModal"] != null)
+        {
+            var modal = TempData["displayModal"].ToString();
+            <script type='text/javascript'>
+        $(document).ready(function(){
+            $('#@modal').modal('show');
+        });
+            </script>
+        }
+    </form>
+</body>

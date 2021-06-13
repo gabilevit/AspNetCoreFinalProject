@@ -1,0 +1,54 @@
+﻿@model AspNetCoreFinalProject.Models.Animal
+
+<body>
+    <form enctype="multipart/form-data" asp-controller="Home" asp-action="UpdatedAnimal" asp-route-Id="@Model.Id" method="post">
+        <div>
+            <label asp-for="Name"></label>
+            <div>
+                <input asp-for="Name" placeholder="Name" />
+                <span asp-validation-for="Name"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="Age"></label>
+            <div>
+                <input asp-for="Age" placeholder="Age" />
+                <span asp-validation-for="Age"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="Description"></label>
+            <div>
+                <input asp-for="Description" placeholder="Description"/>
+                <span asp-validation-for="Description"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="Category"></label>
+            <div>
+                <select asp-for="CategoryId">
+                    @foreach (var currentCategory in ViewBag.Categories)
+                    {
+                        <option value="@currentCategory.Id" selected>
+                            @currentCategory.Name
+                        </option>
+                    }
+                    <option selected>Choose option</option>
+                </select>
+            </div>
+        </div>
+        <p>
+            <div><button type="submit" class="btn btn-primary">Submit</button></div>
+        </p>
+        @section Scripts{
+            <script>
+                $(document).ready(function () {
+                    $('.custom-file-input').on("change", function () {
+                        var fileName = $(this).val().split("\\").pop();
+                        $(this).next('.custom-file-label').html(fileName);
+                    })
+                })
+            </script>
+        }
+    </form>
+</body>

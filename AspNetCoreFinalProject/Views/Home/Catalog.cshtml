@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AspNetCoreFinalProject.Models.Animal>
+
+<h1>Catalog</h1>
+<label>Please choose a category:</label>
+<select name="selectedCategory" id="selectedCategory" class="form-select w-50" onchange="SelectChange()">
+    <option value="0">All animals</option>
+    @foreach (var currentCategory in ViewBag.Categories)
+    {
+        <option value="@currentCategory.Id" selected>
+            @currentCategory.Name
+        </option>
+    }
+    <option selected>Choose option</option>
+</select>
+<table>
+    <thead>
+        <tr>
+            <th>Portrait</th>
+            <th>Name</th>
+            <th>Find out more and comment</th>
+        </tr>
+    </thead>
+    @foreach (var animal in Model)
+    {
+        <tr>
+            <td><img src=@animal.Picturename width="80" height="80" /></td>
+            <td>@animal.Name</td>
+            <td><a asp-action="Animal" asp-route-id=@animal.Id class="btn btn-primary">Details</a></td>
+        </tr>
+    }
+
+</table>
+@section Scripts{
+    <script>
+        function SelectChange() {
+            const value = document.getElementById("selectedCategory").value;
+            window.location.href = `/Home/SpecificCatalog/${value}`;
+        };
+    </script>
+}
+    
+
+

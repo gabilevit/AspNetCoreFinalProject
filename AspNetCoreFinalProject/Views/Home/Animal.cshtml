@@ -1,0 +1,51 @@
+﻿@model AspNetCoreFinalProject.Models.Animal
+
+<a class="navbar-brand">
+    <h1>Animal</h1>
+    <img src="@Model.Picturename" width="80" height="80" />
+</a>
+
+<table>
+    <tr>
+        <th>Name:</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Age:</th>
+        <td>@Model.Age</td>
+    </tr>
+    <tr>
+        <th>Description:</th>
+        <td>@Model.Description</td>
+    </tr>
+    <tr>
+        <th>Category:</th>
+        <td>@ViewBag.Category.Name</td>
+    </tr>
+</table>
+<section>
+    <table>
+        <tr>
+
+            @foreach (var currentComm in ViewBag.Comments)
+            {
+                <th>Comments:</th>
+                <td>@currentComm.Info</td>
+            }
+        </tr>
+    </table>
+    <form asp-action="AddComment" asp-route-Id="@Model.Id" name="newComment">
+        <input type="text" name="newComment" placeholder="Comment here" />
+        <p style="color: red;">@TempData["ProcessMessage"]</p>
+        <button type="submit" name="newComment">Submit</button>
+        @if (TempData["displayModal"] != null)
+        {
+            var modal = TempData["displayModal"].ToString();
+            <script type='text/javascript'>
+        $(document).ready(function(){
+            $('#@modal').modal('show');
+        });
+            </script>
+        }
+    </form>
+</section>

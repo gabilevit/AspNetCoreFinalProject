@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/styles/style.css" rel="stylesheet" />
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/jquery/jquery.js"></script>
+</head> 
+<body>
+    <section class="jumbotron" text-center>
+        <div class="container">  
+            <a class="navbar-brand">
+                <img src="~/images/petStoreLogo.jpg" width="80" height="80" />
+                <h1 id="welcome">Welcome to Gabi's pet store</h1>
+            </a>          
+            <p class="lead text-muted">
+                "having an animal in your life makes you a better human..."
+            </p>
+            <p>
+                <span><a href="/home/homepage" class="btn btn-primary my-2">Home page</a></span>
+                <span><a href="/home/catalog" class="btn btn-primary my-2">Catalog</a></span>
+                <span><a href="/home/administrator" class="btn btn-primary my-2">Administrator</a></span>
+            </p>
+        </div>
+    </section>
+    <div>
+        @RenderBody()
+    </div>
+    @if(IsSectionDefined("Scripts"))
+    {
+        @RenderSection("Scripts", required: true)
+    }
+
+    <footer class="border-top footer text-muted text-center">
+        <div class="container">
+            Copyright &copy; Gabi's pet store @DateTime.Now.Year
+        </div>
+    </footer>
+</body>
+</html>

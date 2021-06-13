@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AspNetCoreFinalProject.Models.Animal>
+
+<h1>Administrator</h1>
+<div class="container">
+    <label>Please choose a category:</label>
+    <select name="selectedCategory" id="selectedCategory" class="form-select w-50" onchange="SelectChange()">
+        @foreach (var currentCategory in ViewBag.Categories)
+        {
+            <option value="@currentCategory.Id" selected>
+                @currentCategory.Name
+            </option>
+        }
+        <option value="0" selected>All animals</option>
+    </select>
+    <table>
+        <tr>
+            <td><span id="add"><a class="btn btn-primary my-2" asp-action="NewAnimal" />Add new animal</span></td>
+        </tr>
+    </table>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Portrait</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Description </th>
+        </tr>
+    </thead>
+    @foreach (var animal in Model)
+    {
+        <tr>
+            <td><img src=@animal.Picturename width="80" height="80" /></td>
+            <td>@animal.Name</td>
+            <td>@animal.Age</td>
+            <td>@animal.Description</td>
+            <td><a class="btn btn-primary my-2" asp-action="EditAnimal" asp-route-id=@animal.Id>Edit</a></td>
+            <td><a class="btn btn-primary my-2" asp-action="DeleteAnimal" asp-route-id=@animal.Id>Delete</a></td>
+        </tr>
+    }
+
+</table>
+@section Scripts{
+    <script>
+        function SelectChange() {
+            const value = document.getElementById("selectedCategory").value;
+            window.location.href = `/Home/SpecificAdministrator/${value}`;
+        };
+    </script>
+}
+    
